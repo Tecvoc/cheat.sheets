@@ -7,15 +7,6 @@ printf '1\n2\n3\n' | awk '{sum += $1} END {print sum}'
 # Using specific character as separator to sum integers from a file or STDIN.
 printf '1:2:3' | awk -F ":" '{print $1+$2+$3}'
 
-# Print a multiplication table.
-awk -v RS='' '
-    {
-        for(i=1;i<=NF;i++){
-            printf("%dx%d=%d%s", i, NR, i*NR, i==NR?"\n":"\t")
-        }
-    }
-' <<< "$(seq 9 | sed 'H;g')"
-
 # Specify output separator character.
 printf '1 2 3' | awk 'BEGIN {OFS=":"}; {print $1,$2,$3}'
 
@@ -82,3 +73,9 @@ awk -F ':' '
 # a painful but useful workaround to get the units comma-separated, as would be
 # doable with Bash's own `printf` built-in.
 awk '/^MemTotal:/ {printf("%'"'"'dMiB\n", $2 / 1024)}'
+
+# One method to count the number of lines; in this case, read from STDIN.
+free | awk '{i++} END{print i}'
+
+# Print path
+echo $PATH|awk 'BEGIN{FS="/";RS=":";OFS="*";ORS="\n|"} {print $1,$2,$3,$4}'
