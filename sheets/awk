@@ -24,3 +24,6 @@ awk 'BEGIN{print ENVIRON["LS_COLORS"]}'
 
 # One method to count the number of lines; in this case, read from STDIN.
 free | awk '{i++} END{print i}'
+
+# Print path
+echo $PATH|awk 'BEGIN{FS="/";RS=":";OFS="*";ORS="\n|"} {print $1,$2,$3,$4}'
