@@ -12,3 +12,31 @@ sed -i 's/\/path\/to\/somewhere\//\/path\/to\/anotherplace\//' /tmp/filetoedit
 
 # Change your sed delimiter to a pipe to avoid escaping slashes.
 sed -i 's|/path/to/somewhere/|/path/to/anotherplace/|' /tmp/filetoedit
+
+# It operaters on the patterns found in incoming data, one line is read, if pattern matches modified output is generated and rest of the line is scanned. It prints all the lines matched by default
+sed 's/pattern/substituted_text/'
+
+
+# Edit a file, via substitution, in-place; changes are made to the files(s)
+sudo sed -i 's/Name=Xfce Session/Name=Xfce_Session/' /usr/share/xsessions/xfce.desktop
+
+
+# By default sed matches once in a case insensitive way, for global match use g, for case insensitivity use I
+echo "hello world soloalone" | sed 's/lo/LOOL/gI'
+
+
+# To do sed multiple times and change the delimiter, first command gets input from input file and this commands output is fed to the second expression, :(colon) is used as a delimiter
+sed -e 's:oo:AWOOO:g' -e 's:WOO:ROO:gI' file.txt
+
+
+# For extended regular expressions use -E, append all words beginning with C with a
+sed -E 's:(^C[a-zA-Z]*):\1a/ga' file.txt
+
+
+# Remove all lines starting with C or L
+sed  '/^[CL]/d'  file.txt
+
+
+# To suppress the default print use -n, first prints line 5,10, second displays all line except 20 to 35
+sed -n '5,10p' file.txt
+sed '20,35d' file.txt
