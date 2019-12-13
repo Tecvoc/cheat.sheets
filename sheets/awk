@@ -79,3 +79,6 @@ free | awk '{i++} END{print i}'
 
 # Print path
 echo $PATH|awk 'BEGIN{FS="/";RS=":";OFS="*";ORS="\n|"} {print $1,$2,$3,$4}'
+
+# The separator variables can be regex also
+awk ' BEGIN{FS="[ ]+=[ ]+";} {print $1,$2} '
