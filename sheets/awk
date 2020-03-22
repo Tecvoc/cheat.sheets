@@ -49,3 +49,9 @@ awk -SPF ':' 'BEGIN {printf("%-17s %-4s %-4s %-s\n", "NAME", "UID", "GID", "SHEL
 # a painful but useful workaround to get the units comma-separated, as would be
 # doable with Bash's own `printf` built-in.
 awk '/^MemTotal:/ {printf("%'"'"'dMiB\n", $2 / 1024)}'
+
+# Print path
+echo $PATH|awk 'BEGIN{FS="/";RS=":";OFS="*";ORS="\n|"} {print $1,$2,$3,$4}'
+
+# The separator variables can be regex also
+awk ' BEGIN{FS="[ ]+=[ ]+";} {print $1,$2} '
