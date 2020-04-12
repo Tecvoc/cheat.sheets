@@ -48,3 +48,7 @@ perl -ne '/^$ARGV[0]::$</ and print(STDERR "WARNING: User has an empty password.
 
 # Display the current user's UID and GID in a format ideal for chmod(1).
 perl -e 'print("$<:" . (split(" ", $)))[0] . "\n")'
+
+# Perl regex command, p is for full file and e is the expression,
+# use ; for multiple expression, and -i for inplace file modification
+perl -pe 's/,/;/g;' -pe 's/;$/,/g' hello.txt
