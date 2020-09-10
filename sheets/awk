@@ -1,4 +1,4 @@
-# awk
+``awk
 # Pattern scanning and processing language
 
 # Sum integers from a file or STDIN, one integer per line.
@@ -82,3 +82,9 @@ echo $PATH|awk 'BEGIN{FS="/";RS=":";OFS="*";ORS="\n|"} {print $1,$2,$3,$4}'
 
 # The separator variables can be regex also
 awk ' BEGIN{FS="[ ]+=[ ]+";} {print $1,$2} '
+
+# We can use also conditionals, NF denotes no of fields
+ldd /bin/bash|awk 'BEGIN{FS="=>";} {if (NF ==2) {print $1}}'
+
+# Use fields conditionals in awk
+echo -e "16 20\n10 15\n14 18"|awk '{ if ( ($1 > 12) && ($2 <= 20)) {print $1,$2}}'

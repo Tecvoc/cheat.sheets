@@ -116,3 +116,6 @@ find ${PATH//:/ } -type f -executable -printf "%P\n"
 
 # Find all csv files in the current directory
 find . -maxdepth 1 -type f -name '*.csv'
+
+# Exclude certain directories
+find . -not \( -path ./node_modules -prune \) -not \( -path ./.git -prune \)
